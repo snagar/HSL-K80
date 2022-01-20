@@ -84,15 +84,15 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir);$(ProjectDir)..\..\libs\XPSDK\CHeaders\XPLM;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Widgets;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Wrappers;$(ProjectDir)..\..\libs\glut-3.7.6-bin;$(ProjectDir)..\..\libs\imgui4xp;$(ProjectDir)..\..\libs\imgui4xp\imgui;$(ProjectDir)..\..\libs\imgui4xp\ImgWindow;$(ProjectDir)..\..\libs\imgui4xp\imgui\example;$(ProjectDir)..\..\libs\imgui4xp\KHR;$(ProjectDir)..\..\libs\glm\glm;$(ProjectDir)..\..\libs\xsb_public_;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\..\libs\XPSDK\Libraries\Win;$(ProjectDir)..\..\libs\glut-3.7.6-bin\glut32.lib;$(ProjectDir)..\..\libs\OpenAL\libs\Win64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\..\libs\XPSDK\CHeaders\XPLM;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Widgets;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Wrappers;$(ProjectDir)..\..\libs\glut-3.7.6-bin;$(ProjectDir)..\..\libs\imgui4xp;$(ProjectDir)..\..\libs\imgui4xp\imgui;$(ProjectDir)..\..\libs\imgui4xp\ImgWindow;$(ProjectDir)..\..\libs\imgui4xp\imgui\example;$(ProjectDir)..\..\libs\imgui4xp\KHR;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\..\libs\XPSDK\Libraries\Win;$(ProjectDir)..\..\libs\OpenAL\libs\Win64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
     <TargetName>win</TargetName>
     <TargetExt>.xpl</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir);$(ProjectDir)..\..\libs\XPSDK\CHeaders\XPLM;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Widgets;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Wrappers;$(ProjectDir)..\..\libs\glut-3.7.6-bin;$(ProjectDir)..\..\libs\imgui4xp;$(ProjectDir)..\..\libs\imgui4xp\imgui;$(ProjectDir)..\..\libs\imgui4xp\ImgWindow;$(ProjectDir)..\..\libs\imgui4xp\imgui\example;$(ProjectDir)..\..\libs\imgui4xp\KHR;$(ProjectDir)..\..\libs\glm\glm;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\..\libs\XPSDK\Libraries\Win;$(ProjectDir)..\..\libs\glut-3.7.6-bin\glut32.lib;$(ProjectDir)..\..\libs\OpenAL\libs\Win64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\..\libs\XPSDK\CHeaders\XPLM;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Widgets;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Wrappers;$(ProjectDir)..\..\libs\glut-3.7.6-bin;$(ProjectDir)..\..\libs\imgui4xp;$(ProjectDir)..\..\libs\imgui4xp\imgui;$(ProjectDir)..\..\libs\imgui4xp\ImgWindow;$(ProjectDir)..\..\libs\imgui4xp\imgui\example;$(ProjectDir)..\..\libs\imgui4xp\KHR;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\..\libs\XPSDK\Libraries\Win;$(ProjectDir)..\..\libs\OpenAL\libs\Win64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
     <TargetName>win</TargetName>
     <TargetExt>.xpl</TargetExt>
   </PropertyGroup>
