@@ -27,6 +27,16 @@
 #include "FireObject.h"
 #include "PhysicsThread.h"
 
+namespace HSL
+{
+	typedef enum class _menuIdRefs
+		: uint8_t
+	{
+		ItemEnable, 
+		ItemWindow
+
+	} hsl_menuIdRefs;
+}
 
 /*
 ToDo Thread:

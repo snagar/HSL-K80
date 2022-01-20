@@ -178,7 +178,10 @@ void DropObject::CalculatePhysics(DropHSLData& HSL)
 	
 
 	negativeVelocity = -1 * myVectorVelocity;
-	vector<double> ropeUnitSphere = XPlaneCartToSphere(get_unit_vector(negativeVelocity));
+
+	//vector<double> ropeUnitSphere = XPlaneCartToSphere(get_unit_vector(negativeVelocity));
+	const auto result = get_unit_vector(negativeVelocity); // saar
+	vector<double> ropeUnitSphere = result; // saar
 
 	normalPositionSphere(1) = ropeUnitSphere(1) - normalPositionSphere(1);
 	normalPositionSphere(2) = ropeUnitSphere(2) - normalPositionSphere(2);

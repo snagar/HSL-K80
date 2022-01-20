@@ -604,7 +604,12 @@ void CargoObject::CalculatePhysics()
 
 		vector<double> negativeVelocity = -1 * myVectorVelocity;
 
-		if (myOrientationFollowsDirection == true) ropeUnitSphere = XPlaneCartToSphere(get_unit_vector(negativeVelocity));
+		//if (myOrientationFollowsDirection == true) ropeUnitSphere = XPlaneCartToSphere(get_unit_vector(negativeVelocity));
+		if (myOrientationFollowsDirection == true)
+		{
+			const auto result = get_unit_vector(negativeVelocity); // saar
+			ropeUnitSphere = result;
+		}
 
 		normalPositionSphere(1) = ropeUnitSphere(1) - normalPositionSphere(1);
 		normalPositionSphere(2) = ropeUnitSphere(2) - normalPositionSphere(2);

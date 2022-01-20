@@ -127,8 +127,8 @@ void HSL_PlugIn::PluginStart()
 	// Menu;
 	myPluginMenu = XPLMAppendMenuItem(XPLMFindPluginsMenu(), "Sling Line", 0, 1);
 	myPluginMenuID = XPLMCreateMenu("Sling Line", XPLMFindPluginsMenu(), myPluginMenu, WrapMenuHandler, 0);
-	myEnableSlingMenu = XPLMAppendMenuItem(myPluginMenuID, "Enable Sling Line", "ItemEnable", 1);
-	XPLMAppendMenuItem(myPluginMenuID, "Toggle Control Window", "ItemWindow", 2);
+	myEnableSlingMenu = XPLMAppendMenuItem(myPluginMenuID, "Enable Sling Line", (void*)HSL::hsl_menuIdRefs::ItemEnable, 1);
+	XPLMAppendMenuItem(myPluginMenuID, "Toggle Control Window", (void*)HSL::hsl_menuIdRefs::ItemWindow, 2);
 
 
 	// Commands
@@ -470,27 +470,59 @@ void HSL_PlugIn::PluginReceiveMessage(XPLMPluginID inFromWho, int inMessage, voi
 
 void HSL_PlugIn::PluginMenuHandler(void* in_menu_ref, void* inItemRef)
 {
+
 	HSLDebugString("Menu Handler");
 	if (myInitialized == false) return;
 
-	if (strcmp((char*)inItemRef, "ItemWindow") == NULL)
+	switch ((HSL::hsl_menuIdRefs)((intptr_t)inItemRef))
 	{
-		if (!imguiPtr->GetVisible())
+		case HSL::hsl_menuIdRefs::ItemWindow:
 		{
-			imguiPtr->Visible(true);
+			if (!imguiPtr->GetVisible())
+			{
+				imguiPtr->Visible(true);
+			}
+			else
+			{
+				imguiPtr->Visible(false);
+			}
 		}
-		else
+		break;
+		case HSL::hsl_menuIdRefs::ItemEnable:
 		{
-			imguiPtr->Visible(false);
+			if (mySlingLineEnabled == true)
+				SlingDisable();
+			else
+				SlingEnable();
 		}
-	}
-	else if (strcmp((char*)inItemRef, "ItemEnable") == NULL)
-	{
-		if (mySlingLineEnabled == true)
-			SlingDisable();
-		else
-			SlingEnable();
-	}
+		break;
+		default:
+			break;
+
+	} // end switch
+
+
+
+	//if (myInitialized == false) return;
+
+	//if (strcmp((char*)inItemRef, "ItemWindow") == NULL)
+	//{
+	//	if (!imguiPtr->GetVisible())
+	//	{
+	//		imguiPtr->Visible(true);
+	//	}
+	//	else
+	//	{
+	//		imguiPtr->Visible(false);
+	//	}
+	//}
+	//else if (strcmp((char*)inItemRef, "ItemEnable") == NULL)
+	//{
+	//	if (mySlingLineEnabled == true)
+	//		SlingDisable();
+	//	else
+	//		SlingEnable();
+	//}
 }
 
 void HSL_PlugIn::PluginKeyCallback(XPLMWindowID inWindowID, char inKey, XPLMKeyFlags inFlags, char inVirtualKey, void* inRefcon, int losingFocus)
@@ -1841,7 +1873,13 @@ void HSL_PlugIn::WaterPlaceCoordinates()
 	pLoadAircraftPath[0] = loadAircraftPath;
 	pLoadAircraftPath[1] = NULL;
 
-	strcpy(loadAircraftPath, myWaterAircraftPath.c_str());
+#ifdef IBM
+	//strcpy(loadAircraftPath, myWaterAircraftPath.c_str());
+	strcpy_s(loadAircraftPath, sizeof(loadAircraftPath), myWaterAircraftPath.c_str());
+#else
+	std::strncpy(loadAircraftPath, myWaterAircraftPath.c_str(), (myWaterAircraftPath.length() <= (sizeof(loadAircraftPath) - 1)) ? myWaterAircraftPath.length() : sizeof(loadAircraftPath) - 1);
+#endif // IBM
+
 
 	XPLMCountAircraft(&planeTotalCount, &planeActiveCount, 0);
 
@@ -1905,7 +1943,12 @@ void HSL_PlugIn::FirePlaceAtCoordinates(vector<double> * pinVectorFireObjectPosi
 	pLoadAircraftPath[0] = loadAircraftPath;
 	pLoadAircraftPath[1] = NULL;
 
-	strcpy(loadAircraftPath, myFireAircraftPath.c_str());
+#ifdef IBM
+	//strcpy(loadAircraftPath, myWaterAircraftPath.c_str());
+	strcpy_s(loadAircraftPath, sizeof(loadAircraftPath), myWaterAircraftPath.c_str());
+#else
+	std::strncpy(loadAircraftPath, myWaterAircraftPath.c_str(), (myWaterAircraftPath.length() <= (sizeof(loadAircraftPath) - 1)) ? myWaterAircraftPath.length() : sizeof(loadAircraftPath) - 1);
+#endif // IBM
 
 	XPLMCountAircraft(&planeTotalCount, &planeActiveCount, 0);
 
