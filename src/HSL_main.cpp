@@ -77,16 +77,16 @@ static float InitPlugin(float elapsed, float elapsed_sim, int counter, void * re
 PLUGIN_API int XPluginStart(char * name, char * sig, char * desc)
 {
 	HSLDebugString("HSL Forked: Startup.\n"); // saar
-	strcpy(name, "HSL-Forked"); // saar
-	strcpy(sig, "k80.HSL");
-	strcpy(desc, "Helicopter Sling Line");
+	strcpy(name, "HSL-4-Mission-X"); // saar
+	strcpy(sig, "HSL.MissionX");
+	strcpy(desc, "Helicopter Sling Line - Forked by snagar to work with Mission-X");
 
 	hsl_output_file.open("HSLLog.txt");
 
 	pHSL = new HSL_PlugIn();
 
-	if (sizeof(unsigned int) != 4 ||
-		sizeof(unsigned short) != 2)
+	constexpr bool b_unsizeInt_and_unsize_short_are_weird = (sizeof(unsigned int) != 4) || (sizeof(unsigned short) != 2); // saar
+	if (b_unsizeInt_and_unsize_short_are_weird)
 	{
 		HSLDebugString("HRM: This plugin was compiled with a compiler with weird type sizes.\n");
 		return 0;

@@ -517,10 +517,14 @@ public:
 	void RegisterDoubleArrayDataref(double *valueIn, std::string nameIn, int sizeIn);
 	void RegisterDoubleDataref(double& valueIn, std::string nameIn);
 	void RegisterVectorDataref(vector<double> & vectorIn, std::string nameIn);
-#ifdef SAAR
-	//void RegisterVectorDataref_f(std::vector<float>& vectorIn, std::string nameIn);
-	//void RegisterArrayDataref_f(float *vectorIn, std::string nameIn);
-	//static void MyDataChangedCallback(void* inRefcon);
+
+#if SAAR_USE_K80_STANDARD == 1
+	void RegisterVectorDataref_f(std::vector<float>& vectorIn, std::string nameIn);
+	void RegisterArrayDataref_f(float *vectorIn, std::string nameIn);
+	
+#endif
+
+#if SAAR == 1
 
 	// Register a dataref and store it in HSL::sharedDatarefs <map>
 	bool setSharedDataRef(std::string inDataName, XPLMDataTypeID inDataType, XPLMDataChanged_f inNotificationFunc, double inValue = 0.0);

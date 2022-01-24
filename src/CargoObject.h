@@ -45,9 +45,10 @@ public:
 	vector<double> myVectorDisplayOffset = vector<double>(3);
 	vector<double> myVectorDisplayAngle = vector<double>(3);
 	vector<double> myVectorDrawPosition = vector<double>(3);
-#ifdef SAAR
-	//std::vector<float> vec_myVectorDrawPosition_f = std::vector<float>(3);
-	//float target_position_arr_f[3]{ 0 };
+#if SAAR_USE_K80_STANDARD == 1
+
+	std::vector<float> vec_myVectorDrawPosition_f = std::vector<float>(3);
+	float target_position_arr_f[3]{ 0 };
 
 #endif
 

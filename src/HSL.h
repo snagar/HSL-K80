@@ -79,16 +79,32 @@ using namespace boost::numeric::ublas;
 //#include "alc.h"
 
 #define SAAR 1
+#define SAAR_USE_K80_STANDARD 0
 
-#ifdef SAAR
+#if SAAR == 1 
 #include <map>
+#endif
 
 namespace HSL
 {
+	// This is a struct that we use to resolve compilation error. Used when creating the menu code in the start function
+	typedef enum class _menuIdRefs
+		: uint8_t
+	{
+		ItemEnable,
+		ItemWindow
+
+} hsl_menuIdRefs;
+
+
+#if SAAR == 1 || SAAR_USE_K80_STANDARD == 1
 	// The new datarefs to monitor cargo position
 	static const std::string DREF_TARGET_POS_LAT_D = "HSL/Cargo/pos_lat_d";
 	static const std::string DREF_TARGET_POS_LON_D = "HSL/Cargo/pos_lon_d";
 	static const std::string DREF_TARGET_POS_ELEV_M_D = "HSL/Cargo/pos_elev_mt_d";
+#endif
+
+#if SAAR_USE_K80_STANDARD == 1
 
 	// The following parameters will be used with the standard code logic
 	static double target_pos_lat_d{ 0.0 };
@@ -99,16 +115,9 @@ namespace HSL
 	static XPLMDataRef dref_target_pos_lon_d{ 0 };
 	static XPLMDataRef dref_target_pos_elev_mt_d{ 0 };
 	// End standard code parameter and dataref logic
+#endif
 
-	// This is a struct that we use for the create menu code in the start code
-	typedef enum class _menuIdRefs
-		: uint8_t
-	{
-		ItemEnable,
-		ItemWindow
-
-	} hsl_menuIdRefs;
-
+#if SAAR == 1
 	// This is the struct I prefer to use for handling datarefs 
 	typedef struct hsl_dref_strct
 	{
@@ -147,11 +156,9 @@ namespace HSL
 	} hsl_dref_strct;
 
 	static std::map<std::string, hsl_dref_strct> sharedDatarefs; // map that holds all the datarefs that saar added to be able to monitor cargo position
+#endif
+} // end HSL namespace
 
-}
-
-
-#endif // SAAR
 
 
 #define IVY_MAX_AIRCRAFT_CONFIG 100
@@ -594,7 +601,7 @@ void WrapWriteVectordoubleCallback(
 	int                  inOffset,
 	int                  inCount);
 
-#ifdef SAAR
+#if SAAR_USE_K80_STANDARD == 1
 int WrapReadArrayfloatCallback(
 	void* inRefcon,
 	float* outValues,    /* Can be NULL */
