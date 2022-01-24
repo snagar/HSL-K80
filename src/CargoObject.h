@@ -45,6 +45,11 @@ public:
 	vector<double> myVectorDisplayOffset = vector<double>(3);
 	vector<double> myVectorDisplayAngle = vector<double>(3);
 	vector<double> myVectorDrawPosition = vector<double>(3);
+#ifdef SAAR
+	//std::vector<float> vec_myVectorDrawPosition_f = std::vector<float>(3);
+	//float target_position_arr_f[3]{ 0 };
+
+#endif
 
 	vector<double> myVectorSize = vector<double>(3); //Length / Width / Height
 	vector<double> myVectorCrossSection = vector<double>(3);

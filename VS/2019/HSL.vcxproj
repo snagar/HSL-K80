@@ -134,6 +134,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>d:\programming\boost-lib\boost</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,7 +142,7 @@
       <AdditionalDependencies>Opengl32.lib;odbc32.lib;odbccp32.lib;XPLM_64.lib;XPWidgets_64.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y $(OutDir)$(TargetName)$(TargetExt)  C:\XP11VK\Resources\plugins\HSL\64\</Command>
+      <Command>copy /Y $(OutDir)$(TargetName)$(TargetExt)  C:\XP11VK\Resources\plugins\HSL\64\ &amp; copy /Y $(OutDir)$(TargetName)$(TargetExt)  C:\XP11\Resources\plugins\HSL\64\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -154,6 +155,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>d:\programming\boost-lib\boost</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,7 +165,7 @@
       <AdditionalDependencies>Opengl32.lib;odbc32.lib;odbccp32.lib;XPLM_64.lib;XPWidgets_64.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y $(OutDir)$(TargetName)$(TargetExt)  C:\XP11VK\Resources\plugins\HSL\64\</Command>
+      <Command>copy /Y $(OutDir)$(TargetName)$(TargetExt)  C:\XP11VK\Resources\plugins\HSL\64\ &amp; copy /Y $(OutDir)$(TargetName)$(TargetExt)  C:\XP11\Resources\plugins\HSL\64\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

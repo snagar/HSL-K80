@@ -27,17 +27,6 @@
 #include "FireObject.h"
 #include "PhysicsThread.h"
 
-namespace HSL
-{
-	typedef enum class _menuIdRefs
-		: uint8_t
-	{
-		ItemEnable, 
-		ItemWindow
-
-	} hsl_menuIdRefs;
-}
-
 /*
 ToDo Thread:
 
@@ -45,6 +34,7 @@ Make Dataref Access function thread safe -> Stop Computation, write value, start
 Make Reset properly for out functions! Stop Computation on Reset
 
 */
+
 
 struct CargoDataShared
 {
@@ -56,8 +46,6 @@ struct CargoDataShared
 	
 	double myFrameTimeMax = 0;
 	bool myNewFrame = false;
-
-	
 
 	vector<double> myVectorRope = vector<double>(3);
 
@@ -429,6 +417,7 @@ public:
 
 	XPLMDataRef myDrBambiBucketReleaseWorkaround = NULL;
 
+
 	///////////////////////////////////////////////////
 	// DataRefs X-Plane Local Copies
 
@@ -528,6 +517,15 @@ public:
 	void RegisterDoubleArrayDataref(double *valueIn, std::string nameIn, int sizeIn);
 	void RegisterDoubleDataref(double& valueIn, std::string nameIn);
 	void RegisterVectorDataref(vector<double> & vectorIn, std::string nameIn);
+#ifdef SAAR
+	//void RegisterVectorDataref_f(std::vector<float>& vectorIn, std::string nameIn);
+	//void RegisterArrayDataref_f(float *vectorIn, std::string nameIn);
+	//static void MyDataChangedCallback(void* inRefcon);
+
+	// Register a dataref and store it in HSL::sharedDatarefs <map>
+	bool setSharedDataRef(std::string inDataName, XPLMDataTypeID inDataType, XPLMDataChanged_f inNotificationFunc, double inValue = 0.0);
+
+#endif // SAAR
 
 	void RegisterIntDataref(bool& valueIn, std::string nameIn);
 	void RegisterStringDataref(std::string& valueIn, std::string nameIn);

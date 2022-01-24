@@ -226,6 +226,29 @@ void HSL_PlugIn::PluginStart()
 
 	//RegisterVectorDataref(myCargo.myVectorPosition,			"HSL/Cargo/Position");
 	RegisterVectorDataref(myCargo.myVectorDrawPosition, "HSL/Cargo/Position");
+#ifdef SAAR
+	//myCargo.vec_myVectorDrawPosition_f = { (float)myCargo.myVectorDrawPosition(0), (float)myCargo.myVectorDrawPosition(1), (float)myCargo.myVectorDrawPosition(2) };
+
+	//myCargo.target_position_arr_f[0] = (float)myCargo.myVectorDrawPosition(0);
+	//myCargo.target_position_arr_f[1] = (float)myCargo.myVectorDrawPosition(1);
+	//myCargo.target_position_arr_f[2] = (float)myCargo.myVectorDrawPosition(2);
+
+	// register new datarefs using saar dataref struct logic
+	setSharedDataRef(HSL::DREF_TARGET_POS_LAT_D, xplmType_Double, NULL);
+	setSharedDataRef(HSL::DREF_TARGET_POS_LON_D, xplmType_Double, NULL);
+	setSharedDataRef(HSL::DREF_TARGET_POS_ELEV_M_D, xplmType_Double, NULL);
+
+	//// Registering the datarefs using HSL standard code
+	//RegisterDoubleDataref(HSL::target_pos_lat_d, HSL::DREF_TARGET_POS_LAT_D);
+	//HSL::dref_target_pos_lat_d = myRegisteredDatarefs.back();
+	//RegisterDoubleDataref(HSL::target_pos_lon_d, HSL::DREF_TARGET_POS_LON_D);
+	//HSL::dref_target_pos_lon_d = myRegisteredDatarefs.back();
+	//RegisterDoubleDataref(HSL::target_pos_elev_mt_d, HSL::DREF_TARGET_POS_ELEV_M_D);
+	//HSL::dref_target_pos_elev_mt_d = myRegisteredDatarefs.back();
+
+	//myCargoDataShared.dref_cargoPositionGL = myRegisteredDatarefs.back();
+#endif // SAAR
+
 	RegisterDoubleDataref(myCargo.myHeight,					"HSL/Cargo/Height");
 	RegisterDoubleDataref(myCargo.myMass,					"HSL/Cargo/Mass");
 	RegisterVectorDataref(myCargo.myVectorSize,				"HSL/Cargo/Size");
@@ -738,6 +761,31 @@ int HSL_PlugIn::DrawCallback(XPLMDrawingPhase inPhase, int inIsBefore, void* inR
 
 			DrawInstanceCreate(myCargoInstanceRef, myCargoObjectRef);
 			DrawInstanceSetPosition(myCargoInstanceRef, myCargoObjectRef, vectorCargoPointOpenGL, cargoVectorDisplayAngle, true);
+
+#ifdef SAAR
+			std::vector <double> vecCargoPosGL = { vectorCargoPointOpenGL(0),vectorCargoPointOpenGL(1),vectorCargoPointOpenGL(2) };
+			std::vector <double> vecCargoWorld(3);
+			XPLMLocalToWorld(vecCargoPosGL.at(0), vecCargoPosGL.at(1), vecCargoPosGL.at(2), &vecCargoWorld[0], &vecCargoWorld[1], &vecCargoWorld[2]);
+			// write the cargo position
+			//std::vector <float> vecCargoWorld_f { (float)vecCargoWorld.at(0), (float)vecCargoWorld.at(1), (float)vecCargoWorld.at(2) };
+
+			//// tried using float array instead of vector to write to dataref float array
+			//myCargo.target_position_arr_f[0] = (float)vecCargoWorld.at(0);
+			//myCargo.target_position_arr_f[1] = (float)vecCargoWorld.at(1);
+			//myCargo.target_position_arr_f[2] = (float)vecCargoWorld.at(2);
+
+			// Writing the dataref using Saar dataref struct logic
+			HSL::sharedDatarefs[HSL::DREF_TARGET_POS_LAT_D].setValue(vecCargoWorld.at(0));
+			HSL::sharedDatarefs[HSL::DREF_TARGET_POS_LON_D].setValue(vecCargoWorld.at(1));
+			HSL::sharedDatarefs[HSL::DREF_TARGET_POS_ELEV_M_D].setValue(vecCargoWorld.at(2));
+
+			// Writing to the custom dataref using HSL code standard
+			//XPLMSetDatad(HSL::dref_target_pos_lat_d, vecCargoWorld.at(0));
+			//XPLMSetDatad(HSL::dref_target_pos_lon_d, vecCargoWorld.at(1));
+			//XPLMSetDatad(HSL::dref_target_pos_elev_mt_d, vecCargoWorld.at(2));
+
+			//XPLMSetDatavf(myCargoDataShared.dref_cargoPositionGL, myCargo.target_position_arr_f, 0, 3);
+#endif // SAAR
 
 			
 			
@@ -2142,6 +2190,70 @@ void HSL_PlugIn::RegisterVectorDataref(vector<double>& vectorIn, std::string nam
 		XPLMSendMessageToPlugin(myDataRefEditorPluginID, MSG_ADD_DATAREF, (void*)nameIn.c_str());
 	}
 }
+
+
+
+#ifdef SAAR
+//void HSL_PlugIn::RegisterVectorDataref_f(std::vector<float>& vectorIn, std::string nameIn)
+//{
+//	CARGO_SHM_SECTION_START
+//		myRegisteredDatarefs.push_back(
+//			XPLMRegisterDataAccessor(nameIn.c_str(), xplmType_FloatArray, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, WrapReadVectorfloatCallback, WrapWriteVectorfloatCallback, NULL, NULL, &vectorIn, &vectorIn)
+//		);
+//
+//}
+
+
+//void HSL_PlugIn::RegisterArrayDataref_f(float* arrayIn_f, std::string nameIn)
+//{
+//	CARGO_SHM_SECTION_START
+//		myRegisteredDatarefs.push_back(
+//			XPLMRegisterDataAccessor(nameIn.c_str(), xplmType_FloatArray, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, WrapReadArrayfloatCallback, WrapWriteArrayfloatCallback, NULL, NULL, &arrayIn_f, &arrayIn_f)
+//		);
+//
+//}
+
+//void HSL_PlugIn::MyDataChangedCallback(void* inRefcon)
+//{
+//	CARGO_SHM_SECTION_START
+//
+//}
+
+bool HSL_PlugIn::setSharedDataRef(std::string inDataName, XPLMDataTypeID inDataType, XPLMDataChanged_f inNotificationFunc, double inValue)
+{
+	CARGO_SHM_SECTION_START
+
+	HSL::hsl_dref_strct     dref;
+	XPLMDataChanged_f       notificationFunc = NULL; // MyDataChangedCallback;
+
+	if (!(inNotificationFunc == NULL))
+		notificationFunc = inNotificationFunc;
+
+	if (inDataName.empty())
+		return false;
+
+	int status = XPLMShareData(inDataName.c_str(), inDataType, notificationFunc, NULL);
+	if (status) // store dataref
+	{
+		dref.dataRefId = XPLMFindDataRef(inDataName.c_str());
+		if (dref.dataRefId)
+		{
+			dref.key = inDataName;
+			dref.dataRefType = XPLMGetDataRefTypes(dref.dataRefId);
+			dref.setValue(inValue); // init value
+
+			HSL::sharedDatarefs[inDataName] = dref; // store dataref
+
+			return true; // register shared dataref is success
+		}
+
+	}
+
+	return false;
+}
+#endif
+
+
 
 void HSL_PlugIn::RegisterIntDataref(bool& valueIn, std::string nameIn)
 {

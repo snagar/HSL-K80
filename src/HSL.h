@@ -14,6 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef HSL_H_
+#define HSL_H_
 
 #pragma once
 #include <stdio.h>
@@ -76,6 +78,80 @@ using namespace boost::numeric::ublas;
 //#include "al.h"
 //#include "alc.h"
 
+#define SAAR 1
+
+#ifdef SAAR
+#include <map>
+
+namespace HSL
+{
+	// The new datarefs to monitor cargo position
+	static const std::string DREF_TARGET_POS_LAT_D = "HSL/Cargo/pos_lat_d";
+	static const std::string DREF_TARGET_POS_LON_D = "HSL/Cargo/pos_lon_d";
+	static const std::string DREF_TARGET_POS_ELEV_M_D = "HSL/Cargo/pos_elev_mt_d";
+
+	// The following parameters will be used with the standard code logic
+	static double target_pos_lat_d{ 0.0 };
+	static double target_pos_lon_d{ 0.0 };
+	static double target_pos_elev_mt_d{ 0.0 };
+
+	static XPLMDataRef dref_target_pos_lat_d{ 0 };
+	static XPLMDataRef dref_target_pos_lon_d{ 0 };
+	static XPLMDataRef dref_target_pos_elev_mt_d{ 0 };
+	// End standard code parameter and dataref logic
+
+	// This is a struct that we use for the create menu code in the start code
+	typedef enum class _menuIdRefs
+		: uint8_t
+	{
+		ItemEnable,
+		ItemWindow
+
+	} hsl_menuIdRefs;
+
+	// This is the struct I prefer to use for handling datarefs 
+	typedef struct hsl_dref_strct
+	{
+		std::string key{ "" }; // keep the dataref string name, but I'm not sure that we need this one
+		XPLMDataRef dataRefId;
+		XPLMDataTypeID dataRefType;
+
+		bool setValue(double inVal)
+		{
+			switch (dataRefType)
+			{
+				case xplmType_Int:
+				{
+					XPLMSetDatai(dataRefId, (int)inVal);
+				}
+				break;
+				case xplmType_Float:
+				{
+					XPLMSetDataf(dataRefId, (float)inVal);
+				}
+				break;
+				case (xplmType_Double):
+				case (xplmType_Float | xplmType_Double):
+				{
+					XPLMSetDatad(dataRefId, inVal);
+				}
+				break;
+				default:
+					return false;
+					break;
+			} // end switch
+
+			return true;
+		}
+
+	} hsl_dref_strct;
+
+	static std::map<std::string, hsl_dref_strct> sharedDatarefs; // map that holds all the datarefs that saar added to be able to monitor cargo position
+
+}
+
+
+#endif // SAAR
 
 
 #define IVY_MAX_AIRCRAFT_CONFIG 100
@@ -518,6 +594,30 @@ void WrapWriteVectordoubleCallback(
 	int                  inOffset,
 	int                  inCount);
 
+#ifdef SAAR
+int WrapReadArrayfloatCallback(
+	void* inRefcon,
+	float* outValues,    /* Can be NULL */
+	int                  inOffset,
+	int                  inMax);
+void WrapWriteArrayfloatCallback(
+	void* inRefcon,
+	float* inValues,
+	int                  inOffset,
+	int                  inCount);
+int WrapReadVectorfloatCallback(
+	void* inRefcon,
+	float* outValues,    /* Can be NULL */
+	int                  inOffset,
+	int                  inMax);
+void WrapWriteVectorfloatCallback(
+	void* inRefcon,
+	float* inValues,
+	int                  inOffset,
+	int                  inCount);
+#endif
+
+
 int WrapReaddoubleArrayCallback(
 	void* inRefcon,
 	float* outValues,    /* Can be NULL */
@@ -554,3 +654,5 @@ void WrapKeyCallback(XPLMWindowID inWindowID, char inKey, XPLMKeyFlags inFlags, 
 int WrapMouseClickCallback(XPLMWindowID inWindowID, int x, int y, XPLMMouseStatus inMouse, void * inRefcon);
 
 PLUGIN_API float WrapFlightLoopCallback(float elapsedMe, float elapsedSim, int counter, void * refcon);
+
+#endif // !HSL_H_

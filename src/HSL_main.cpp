@@ -279,6 +279,67 @@ void WrapWriteVectordoubleCallback(
 
 }
 
+#ifdef SAAR
+int WrapReadArrayfloatCallback(void* inRefcon, float* outValues, int inOffset, int inMax)
+{
+	CARGO_SHM_SECTION_START
+		if (inMax < 3) return 0;
+	float* pVector = (float*) inRefcon;
+
+	outValues[0] = pVector[0];
+	outValues[1] = pVector[1];
+	outValues[2] = pVector[2];
+
+	return 3;
+}
+
+void WrapWriteArrayfloatCallback(void* inRefcon, float* inValues, int inOffset, int inCount)
+{
+	CARGO_SHM_SECTION_START
+	float* pVector = (float*)inRefcon;
+
+	pVector[0] = inValues[0];
+	pVector[1] = inValues[1];
+	pVector[2] = inValues[2];
+
+}
+
+
+int WrapReadVectorfloatCallback(void* inRefcon, float* outValues, int inOffset, int inMax)
+{
+	CARGO_SHM_SECTION_START
+		if (inMax < 3) return 0;
+	std::vector<float>* pVector = (std::vector<float>*) inRefcon;
+
+	outValues[0] = pVector->at(0);
+	outValues[1] = pVector->at(1);
+	outValues[2] = pVector->at(2);
+
+	//outValues[0] = (float)(*pVector)(0);
+	//outValues[1] = (float)(*pVector)(1);
+	//outValues[2] = (float)(*pVector)(2);
+	return 3;
+}
+
+void WrapWriteVectorfloatCallback(void* inRefcon, float* inValues, int inOffset, int inCount)
+{
+	CARGO_SHM_SECTION_START
+		if (inCount < 3 || inValues == nullptr ) return;
+	std::vector<float>* pVector = (std::vector<float>*) inRefcon;
+	float f1 = inValues[0];
+	float f2 = inValues[1];
+	float f3 = inValues[2];
+
+	pVector->push_back(inValues[0]);
+	pVector->push_back(inValues[1]);
+	pVector->push_back(inValues[2]);
+
+	//(*pVector)(0) = inValues[0];
+	//(*pVector)(1) = inValues[1];
+	//(*pVector)(2) = inValues[2];
+}
+#endif 
+
 int WrapReaddoubleArrayCallback(
 	void* inRefcon,
 	float* outValues,    /* Can be NULL */
