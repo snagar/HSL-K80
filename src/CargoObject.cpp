@@ -192,7 +192,11 @@ void CargoObject::CalculatePhysics()
 	double frameTime = frameTimeNano / (1000000000.0);
 	myStartTime = timeNow;
 
+#ifdef IBM
 	myCargoDataShared.myFrameTimeMax = max(myCargoDataShared.myFrameTimeMax, frameTimeNano);
+#else
+	myCargoDataShared.myFrameTimeMax = std::max(myCargoDataShared.myFrameTimeMax, frameTimeNano);
+#endif
 	
 	//double frameTime = myCargoDataShared.myFrameTime;
 

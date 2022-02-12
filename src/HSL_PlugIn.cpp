@@ -17,6 +17,7 @@
 
 #include "HSL_PlugIn.h"
 #include <thread>
+#include <mutex>
 
 std::recursive_mutex cargoDataSharedMutex;
 
