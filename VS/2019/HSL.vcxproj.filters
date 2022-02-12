@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\libs">
+      <UniqueIdentifier>{75a8e487-6211-4e05-b02f-1932b6d7c9e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\libs\imgWindow">
+      <UniqueIdentifier>{da29df27-e099-4371-8ca9-dc3ef52cef25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\libs\imgui">
+      <UniqueIdentifier>{e4e4801d-41d7-4e24-b35e-5d3f6fff4d3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{b67d925d-179d-4677-8843-9b45ae33a7ce}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\libs\imgui4xp\imgui\imgui.cpp">
+      <Filter>Source Files\libs\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\imgui4xp\imgui\imgui_draw.cpp">
+      <Filter>Source Files\libs\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\imgui4xp\imgui\misc\cpp\imgui_stdlib.cpp">
+      <Filter>Source Files\libs\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\imgui4xp\imgui\imgui_tables.cpp">
+      <Filter>Source Files\libs\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\imgui4xp\imgui\imgui_widgets.cpp">
+      <Filter>Source Files\libs\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\imgui4xp\ImgWindow\ImgFontAtlas.cpp">
+      <Filter>Source Files\libs\imgWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\imgui4xp\ImgWindow\ImgWindow.cpp">
+      <Filter>Source Files\libs\imgWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\CargoObject.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\DropObject.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\DropThread.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\FireObject.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\HSL_main.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\HSL_PlugIn.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\HSLImguiWidget.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\PhysicsThread.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\libs\imgui4xp\imgui\imgui.h">
+      <Filter>Source Files\libs\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\imgui4xp\imgui\imgui_internal.h">
+      <Filter>Source Files\libs\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\imgui4xp\imgui\misc\cpp\imgui_stdlib.h">
+      <Filter>Source Files\libs\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\imgui4xp\imgui\imconfig.h">
+      <Filter>Source Files\libs\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\imgui4xp\ImgWindow\ImgFontAtlas.h">
+      <Filter>Source Files\libs\imgWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\imgui4xp\ImgWindow\ImgWindow.h">
+      <Filter>Source Files\libs\imgWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\CargoObject.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\DropObject.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\DropThread.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\FireObject.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\HSL.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\HSL_PlugIn.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\HSLImguiWidget.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\LoadBaseObject.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\PhysicsThread.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\SysOpenGL.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TSQueue.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
