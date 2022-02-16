@@ -18,6 +18,9 @@
 #include "PhysicsThread.h"
 #include "HSL_PlugIn.h"
 #include <thread>
+#ifdef LIN
+	#include <pthread.h>
+#endif
 
 PhysicsThread::PhysicsThread(HSL_PlugIn& HSLNew) :
 	HSL(HSLNew)
@@ -43,6 +46,26 @@ void PhysicsThread::RunPhysicsThread(int index)
 					SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_HIGHEST);
 				else
 					SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_NORMAL);
+#else
+				// taken from https://stackoverflow.com/questions/10876342/equivalent-of-setthreadpriority-on-linux-pthreads
+				// I don't think we should implement this in Linux.
+				// In any case when I debuged the code, the values were 0 and 0 for policy and max_allowed, so it seems a moot point to implement this
+
+//				pthread_t thId = pthread_self();
+//				pthread_attr_t thAttr;
+//				int policy = 0;
+//				int max_prio_for_policy = 0;
+//				if (HSL.myCargoDataShared.myHighPerformace == true)
+//				{
+//					pthread_attr_init(&thAttr);
+//					pthread_attr_getschedpolicy(&thAttr, &policy);
+//					max_prio_for_policy = sched_get_priority_max(policy);
+//
+//
+//					pthread_setschedprio(thId, max_prio_for_policy);
+//					pthread_attr_destroy(&thAttr);
+//				}
+
 #endif
 			}
 
