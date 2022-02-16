@@ -1244,6 +1244,7 @@ void HSL_PlugIn::ReadProfiles()
 	//for (const auto& entry : std::experimental::filesystem::v1:: //directory_iterator(myConfigPath))
 	//std::experimental::filesystem 
 
+#if defined SAAR == 0 
 	myProfileNames.clear();
 	myProfilePaths.clear();
 
@@ -1271,7 +1272,9 @@ void HSL_PlugIn::ReadProfiles()
 		} while (FindNextFile(hFind, &data));
 		FindClose(hFind);
 	}
-
+#else 
+	ReadProfiles_saar();
+#endif
 	//FindFirstFile()
 
 	/*boost::filesystem::directory_iterator end_iter;
@@ -1294,7 +1297,6 @@ void HSL_PlugIn::ReadProfiles()
 
 	}*/
 
-	ReadProfiles_saar();
 }
 
 void HSL_PlugIn::ReadProfiles_saar()
@@ -1311,13 +1313,15 @@ void HSL_PlugIn::ReadProfiles_saar()
 		for (const auto& entry : fs::directory_iterator(path))
 		{
 			// std::cout << entry.path() << std::endl;
-			const auto fileName = entry.path().filename().string();
-			const auto    found = ( fileName.find(filter.c_str(), fileName.length() - filterLength) && (fileName.compare("HSL.ini") != 0) ); // check last 4 characters if ".ini"  and not "HSL.ini"
-			if (found)
+			if (fs::is_regular_file(entry))
 			{
-				//mapFiles.insert(make_pair(fileName, entry.path().string()));
-				myProfileNames.push_back(fileName);
-				myProfilePaths.push_back(entry.path().string());
+				const auto fileName = entry.path().filename().string();
+				if ((fileName.find(filter.c_str(), fileName.length() - filterLength) != std::string::npos) && (fileName.compare("HSL.ini") != 0)) // check last 4 characters if ".ini"  and not "HSL.ini"
+				//if (found)
+				{
+					myProfileNames.push_back(entry.path().stem().string()); // stem returns the name of the file without extension
+					myProfilePaths.push_back(fileName); 
+				}
 			}
 		}
 	}

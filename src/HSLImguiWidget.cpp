@@ -174,7 +174,7 @@ void HSLImguiWidget::buildInterface()
 		if (ImGui::Button("Create Profile"))
 		{
 			pHSL->ConfigSave(pHSL->myNewProfileName + ".ini");
-			pHSL->ReadProfiles();
+			pHSL->ReadProfiles(); // saar the code inside this function wll be afected by the flags: "SAAR" valus. If irs value is 1 then compiler will use "ReadProfiles_Saar()" function else it will use the original code path 
 
 			for (int index = 0; index < pHSL->myProfileNames.size(); index++)
 			{

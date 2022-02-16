@@ -84,14 +84,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir);$(ProjectDir)..\..\libs\XPSDK\CHeaders\XPLM;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Widgets;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Wrappers;$(ProjectDir)..\..\libs\glut-3.7.6-bin;$(ProjectDir)..\..\libs\imgui4xp;$(ProjectDir)..\..\libs\imgui4xp\imgui;$(ProjectDir)..\..\libs\imgui4xp\ImgWindow;$(ProjectDir)..\..\libs\imgui4xp\imgui\example;$(ProjectDir)..\..\libs\imgui4xp\KHR;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\..\libs\XPSDK\CHeaders\XPLM;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Widgets;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Wrappers;$(ProjectDir)..\..\libs\boost\boost_1_78_0;$(ProjectDir)..\..\libs\glut-3.7.6-bin;$(ProjectDir)..\..\libs\imgui4xp;$(ProjectDir)..\..\libs\imgui4xp\imgui;$(ProjectDir)..\..\libs\imgui4xp\ImgWindow;$(ProjectDir)..\..\libs\imgui4xp\imgui\example;$(ProjectDir)..\..\libs\imgui4xp\KHR;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\..\libs\XPSDK\Libraries\Win;$(ProjectDir)..\..\libs\OpenAL\libs\Win64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
     <TargetName>win</TargetName>
     <TargetExt>.xpl</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir);$(ProjectDir)..\..\libs\XPSDK\CHeaders\XPLM;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Widgets;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Wrappers;$(ProjectDir)..\..\libs\glut-3.7.6-bin;$(ProjectDir)..\..\libs\imgui4xp;$(ProjectDir)..\..\libs\imgui4xp\imgui;$(ProjectDir)..\..\libs\imgui4xp\ImgWindow;$(ProjectDir)..\..\libs\imgui4xp\imgui\example;$(ProjectDir)..\..\libs\imgui4xp\KHR;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\..\libs\XPSDK\CHeaders\XPLM;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Widgets;$(ProjectDir)..\..\libs\XPSDK\CHeaders\Wrappers;$(ProjectDir)..\..\libs\boost\boost_1_78_0;$(ProjectDir)..\..\libs\glut-3.7.6-bin;$(ProjectDir)..\..\libs\imgui4xp;$(ProjectDir)..\..\libs\imgui4xp\imgui;$(ProjectDir)..\..\libs\imgui4xp\ImgWindow;$(ProjectDir)..\..\libs\imgui4xp\imgui\example;$(ProjectDir)..\..\libs\imgui4xp\KHR;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\..\libs\XPSDK\Libraries\Win;$(ProjectDir)..\..\libs\OpenAL\libs\Win64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
     <TargetName>win</TargetName>
     <TargetExt>.xpl</TargetExt>
@@ -133,7 +133,7 @@
       <PreprocessorDefinitions>WIN32;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_DEBUG;_WINDOWS;_USRDLL;SIMDATA_EXPORTS;IBM=1;XPLM200=1;XPLM210=1;XPLM300=1;XPLM301=1;XPLM302=1;XPLM_DEPRECATED=1;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>d:\programming\boost-lib\boost</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>d:\programming\boost-lib\boost_</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -154,7 +154,7 @@
       <PreprocessorDefinitions>WIN32;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;NDEBUG;_WINDOWS;_USRDLL;SIMDATA_EXPORTS;IBM=1;XPLM200=1;XPLM210=1;XPLM300=1;XPLM301=1;XPLM302=1;XPLM_DEPRECATED=1;_CRT_SECURE_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>d:\programming\boost-lib\boost</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>d:\programming\boost-lib\boost_</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
