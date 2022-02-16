@@ -38,10 +38,12 @@ void PhysicsThread::RunPhysicsThread(int index)
 		{
 			if (HIGH_PERFORMANCE != HSL.myCargoDataShared.myHighPerformace)
 			{
+#ifdef IBM
 				if (HSL.myCargoDataShared.myHighPerformace == true)
 					SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_HIGHEST);
 				else
 					SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_NORMAL);
+#endif
 			}
 
 			HIGH_PERFORMANCE = HSL.myCargoDataShared.myHighPerformace;
