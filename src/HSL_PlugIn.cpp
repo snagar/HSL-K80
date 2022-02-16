@@ -15,6 +15,23 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+// saar added <filesystem> support
+#ifdef MAC
+#if __has_include(<filesystem>) && (!defined(__MAC_OS_X_VERSION_MIN_REQUIRED) || __MAC_OS_X_VERSION_MIN_REQUIRED >= 101500)
+#define GHC_USE_STD_FS
+#include <filesystem>
+namespace fs = std::filesystem;
+#endif
+
+#ifndef GHC_USE_STD_FS
+#include <ghc/filesystem.hpp>
+namespace fs = ghc::filesystem;
+#endif
+#else // Linux and IBM
+#include <filesystem>
+namespace fs = std::filesystem;
+#endif
+
 #include "HSL_PlugIn.h"
 #include <thread>
 #include <mutex>
@@ -1276,6 +1293,35 @@ void HSL_PlugIn::ReadProfiles()
 		}
 
 	}*/
+
+	ReadProfiles_saar();
+}
+
+void HSL_PlugIn::ReadProfiles_saar()
+{
+	myProfileNames.clear();
+	myProfilePaths.clear();
+	std::string filter = ".ini";
+	auto filterLength = filter.length();
+
+	std::string iniPath = myConfigPath; // +"*.ini";
+	fs::path path = iniPath;
+	if (fs::directory_entry(path).is_directory())
+	{
+		for (const auto& entry : fs::directory_iterator(path))
+		{
+			// std::cout << entry.path() << std::endl;
+			const auto fileName = entry.path().filename().string();
+			const auto    found = ( fileName.find(filter.c_str(), fileName.length() - filterLength) && (fileName.compare("HSL.ini") != 0) ); // check last 4 characters if ".ini"  and not "HSL.ini"
+			if (found)
+			{
+				//mapFiles.insert(make_pair(fileName, entry.path().string()));
+				myProfileNames.push_back(fileName);
+				myProfilePaths.push_back(entry.path().string());
+			}
+		}
+	}
+
 
 
 }

@@ -474,6 +474,7 @@ public:
 
 	bool SearchForObjectAnimation(std::string filenameIn);
 	void ReadProfiles();
+	void ReadProfiles_saar(); // saar convert code to C++17 dependent and no windows specific API
 
 	void AircraftConfigSave();
 	void AircraftConfigRead();
