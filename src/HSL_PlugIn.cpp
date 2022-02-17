@@ -1,4 +1,4 @@
-﻿/*
+/*
  * This file is part of the HSL distribution (https://github.com/kristian80/HSL).
  * Copyright (c) 2019 Kristian80.
  *
