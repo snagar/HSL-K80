@@ -2,4 +2,7 @@
 libs/.DS_Store
 libs/boost/boost_1_78_0/
 xcode/v10x/HSL-K80/DerivedData/
-
+.vs/HSL/v16/Browse.VC.db
+.vs/HSL/v16/Solution.VC.db
+VS/2019/.vs/
+VS/2019/x64/
