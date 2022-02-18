@@ -143,8 +143,14 @@ void HSL_PlugIn::PluginStart()
 
 
 	// Menu;
-	myPluginMenu = XPLMAppendMenuItem(XPLMFindPluginsMenu(), "Sling Line(F)", 0, 1);
-	myPluginMenuID = XPLMCreateMenu("Sling Line(F)", XPLMFindPluginsMenu(), myPluginMenu, WrapMenuHandler, 0);
+#ifdef RELEASE // saar
+	const std::string_view main_menu_name_vu = "Sling Line(F)";
+#else
+	const std::string_view main_menu_name_vu = "Sling Line(F) - debug";
+#endif // !RELEASE
+
+	myPluginMenu = XPLMAppendMenuItem(XPLMFindPluginsMenu(), main_menu_name_vu.data(), 0, 1);
+	myPluginMenuID = XPLMCreateMenu(main_menu_name_vu.data(), XPLMFindPluginsMenu(), myPluginMenu, WrapMenuHandler, 0);
 	myEnableSlingMenu = XPLMAppendMenuItem(myPluginMenuID, "Enable Sling Line", (void*)HSL::hsl_menuIdRefs::ItemEnable, 1);
 	XPLMAppendMenuItem(myPluginMenuID, "Toggle Control Window", (void*)HSL::hsl_menuIdRefs::ItemWindow, 2);
 
