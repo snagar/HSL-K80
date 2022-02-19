@@ -144,9 +144,10 @@ void HSL_PlugIn::PluginStart()
 
 	// Menu;
 #ifdef RELEASE // saar
-	const std::string_view main_menu_name_vu = "Sling Line(F)";
+	//const std::string_view main_menu_name_vu = "Sling Line(F)";
+	constexpr std::string_view main_menu_name_vu = "Sling Line(F) " __DATE__;
 #else
-	const std::string_view main_menu_name_vu = "Sling Line(F) - debug";
+	constexpr std::string_view main_menu_name_vu = "Sling Line(F) - debug " __DATE__;
 #endif // !RELEASE
 
 	myPluginMenu = XPLMAppendMenuItem(XPLMFindPluginsMenu(), main_menu_name_vu.data(), 0, 1);
